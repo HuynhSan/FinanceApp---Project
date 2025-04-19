@@ -40,17 +40,17 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
         <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
             <p class="text-s font-bold text-gray-800">Total Income</p>
-            <p class="text-xl font-semibold text-green-700 mt-1">{{ total_income|floatformat:2|intcomma }}₫</p>
+            <p class="text-xl font-semibold text-green-700 mt-1">{{ total_income|floatformat:2|intcomma }}</p>
         </div>
     
         <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
             <p class="text-s font-bold text-gray-800">Total Expenses</p>
-            <p class="text-xl font-semibold text-red-600 mt-1">{{ total_expense|floatformat:2|intcomma }}₫</p>
+            <p class="text-xl font-semibold text-red-600 mt-1">{{ total_expense|floatformat:2|intcomma }}</p>
         </div>
     
         <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
             <p class="text-s font-bold text-gray-800">Net Balance</p>
-            <p class="text-xl font-semibold text-blue-800 mt-1">{{ net_income|floatformat:2|intcomma }}₫</p>
+            <p class="text-xl font-semibold text-blue-800 mt-1">{{ net_income|floatformat:2|intcomma }}</p>
         </div>
     
         <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
@@ -110,7 +110,7 @@
                             <td class="py-2 px-4">{{ t.date }}</td>
                             <td class="py-2 px-4">{{ t.category.name }}</td>
                             <td class="py-2 px-4 capitalize">{{ t.type }}</td>
-                            <td class="py-2 px-4">{{ t.amount|intcomma }}₫</td>
+                            <td class="py-2 px-4">{{ t.amount|intcomma }}</td>
                         </tr>
                     {% empty %}
                         <tr>
