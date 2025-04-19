@@ -272,8 +272,9 @@ def update_category(request, pk):
             }
             return render(request, 'tracker/partials/category_success.html', context)
         else:
-            context = {'form': form}
-            return render(request, 'tracker/partials/update_category.html', context)
+            context = {'form': form, 'category': category}
+            response = render(request, 'tracker/partials/update_category.html', context)
+            return retarget(response, '#category-block')
     else:
         form = CategoryForm(instance=category, user=request.user)
 

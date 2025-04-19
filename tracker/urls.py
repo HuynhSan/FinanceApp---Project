@@ -1,9 +1,6 @@
 from django.urls import path
 from tracker import views
-from django.contrib.sessions.models import Session
 
-# Xoá toàn bộ session (mọi người sẽ bị đăng xuất)
-Session.objects.all().delete()
 
 
 urlpatterns = [

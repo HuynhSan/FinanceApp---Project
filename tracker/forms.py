@@ -77,6 +77,18 @@ class CategoryForm(forms.ModelForm):
         # Chuẩn hóa tên để lưu: viết hoa chữ cái đầu
         normalized_name = name.capitalize()
 
+        # Kiểm tra trùng tên với cả của user và mặc định
+        qs = Category.objects.filter(name__iexact=normalized_name).filter(
+            Q(user=self.user) | Q(user__isnull=True)
+        )
+
+        # Loại trừ chính instance (trong trường hợp update không đổi tên)
+        if self.instance.pk:
+            qs = qs.exclude(pk=self.instance.pk)
+
+        if qs.exists():
+            raise forms.ValidationError("This category name already exists.")
+
         # Kiểm tra trùng tên KHÔNG phân biệt hoa thường
         if self.user:
             if Category.objects.filter(name__iexact=normalized_name, user=self.user).exists():
