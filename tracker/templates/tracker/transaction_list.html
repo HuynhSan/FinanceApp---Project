@@ -1,0 +1,22 @@
+{% extends 'tracker/base.html' %}
+
+
+{% block head_title %}
+    Transactions List
+{% endblock %}
+
+{% block content %}
+
+
+<div class="relative overflow-x-auto text-white" id="transaction-block">
+
+    {% comment %} <h1 class="mt-6 text-2xl font-semibold leading-none tracking-tight text-white md:text-3xl lg:text-3xl flex items-center justify-center">      
+        Transactions List
+    </h1> {% endcomment %}
+
+    <!--Tách thành trang riêng để khi lọc chỉ load lại đúng cái danh sách chứ kh phải toàn bộ trang -->
+    {% include 'tracker/partials/transactions-container.html' %}
+
+</div>
+
+{% endblock %}

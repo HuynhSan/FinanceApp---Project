@@ -1,0 +1,44 @@
+{% if message %}
+    <div id="messages" class="fixed bottom-8 right-6 z-50">
+        <div class="message-item px-4 py-3 rounded shadow text-white transition-all duration-500 ease-in-out transform
+            {% if message_type == 'error' %}
+                bg-red-500
+            {% elif message_type == 'success' %}
+                bg-green-500
+            {% else %}
+                bg-blue-500
+            {% endif %}">
+            {{ message }}
+        </div>
+    </div>
+
+{% elif messages %}
+    <div id="messages" class="fixed bottom-8 right-6 z-50 space-y-2">
+        {% for msg in messages %}
+            <div class="message-item px-4 py-3 rounded shadow text-white transition-all duration-500 ease-in-out transform
+                {% if msg.tags == 'error' %}
+                    bg-red-500
+                {% elif msg.tags == 'success' %}
+                    bg-green-500
+                {% else %}
+                    bg-blue-500
+                {% endif %}">
+                {{ msg }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<script>
+    setTimeout(() => {
+        const messages = document.querySelectorAll('.message-item');
+        messages.forEach((msg) => {
+            msg.classList.add('opacity-0', 'translate-x-10'); // mờ và trượt sang phải
+        });
+
+        setTimeout(() => {
+            const wrapper = document.getElementById('messages');
+            if (wrapper) wrapper.remove();
+        }, 600); // đợi animation xong rồi xoá
+    }, 1000); // hiển thị trong 1 giây
+</script>

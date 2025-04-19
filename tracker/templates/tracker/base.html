@@ -1,0 +1,58 @@
+{% load static %}  {# Nạp thẻ static để sử dụng đường dẫn tới file tĩnh như CSS, JS, ảnh... #}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>
+        {% block head_title %}
+            Personal Finance Tracker  {# Tiêu đề mặc định, có thể bị ghi đè trong template con #}
+        {% endblock %}
+    </title>
+
+
+
+    {# Thư viện HTMX, hỗ trợ thao tác AJAX dễ dàng với Django #}
+    {% comment %} <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script> {% endcomment %}
+    
+    <script src="{% static 'js/htmx.min.js' %}"></script>
+
+    {# DaisyUI là UI framework dựa trên Tailwind CSS (nút, card, v.v.) #}
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    
+    {# TailwindCSS: hệ thống utility CSS hiện đại và nhẹ #}
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+
+    {# File CSS tùy chỉnh #}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
+
+
+    {# Block dành cho các thẻ <style> hoặc <script> thêm từ template con nếu cần #}
+    {% block extra_head %}
+
+    {% endblock %}
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+    {# Chèn navbar từ file navbar.html #}
+    {% include 'tracker/partials/navbar.html' %}
+
+    {% include 'tracker/partials/messages.html' %}
+
+
+    {# Vùng nội dung chính của trang - được kế thừa và ghi đè trong các template con #}
+    <div class="max-w-screen-xl mx-auto p-4">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+</body>
+</html>
+
+

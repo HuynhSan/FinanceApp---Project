@@ -1,0 +1,297 @@
+{% load static %}
+
+<nav class="bg-gray-800 text-white">
+    <div class="max-w-screen-xl w-full flex items-center justify-between mx-auto p-4">
+        <!-- Left: Menu + Logo -->
+        <div class="flex items-center justify-start flex-1 md:justify-start">
+            <!-- Nút Menu (mobile only) -->
+            <button id="menu-toggle" type="button"
+                class="inline-flex items-center p-2 text-sm text-white rounded-lg md:hidden hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                aria-controls="mobile-menu" aria-expanded="false">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+    
+            <!-- Logo -->
+            <a href="{% url 'index' %}" class="ml-3 md:ml-0 flex items-center">
+                <span class="text-2xl font-semibold whitespace-nowrap">Finance Tracker</span>
+            </a>
+            
+        </div>
+    
+        <!-- Right: menu & user -->
+        <div class="flex items-center justify-end space-x-4 md:space-x-6">
+            <!-- Menu lớn: ẩn ở mobile -->
+            <div class="hidden md:flex items-center space-x-6 font-bold">
+                <!-- các mục menu như Dashboard, Transactions, Charts -->
+                <ul class="flex flex-col md:flex-row md:space-x-6 mt-4 md:mt-0 font-bold md:items-center">
+            
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'dashboard' %}" 
+                            class="group relative flex items-center gap-1 py-2 pl-3 pr-4 text-white rounded md:p-0 hover:bg-gray-700 hover:text-green-400 transition-all duration-300 ease-in-out"
+                            aria-current="page">
+                        
+                                <!-- ICON -->
+                                <?xml version="1.0" encoding="utf-8"?>
+                                <!--License: MIT. Made by Sargam Icons: https://github.com/planetabhi/sargam-icons-->
+                                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="fff" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5">
+                                <path d="M5.6 2A2.6 2.6 0 0 0 3 4.6v4.8A2.6 2.6 0 0 0 5.6 12h2.8A2.6 2.6 0 0 0 11 9.4V4.6A2.6 2.6 0 0 0 8.4 2H5.6ZM5.6 14A2.6 2.6 0 0 0 3 16.6v2.8A2.6 2.6 0 0 0 5.6 22h2.8a2.6 2.6 0 0 0 2.6-2.6v-2.8A2.6 2.6 0 0 0 8.4 14H5.6ZM15.6 2A2.6 2.6 0 0 0 13 4.6v2.8a2.6 2.6 0 0 0 2.6 2.6h2.8A2.6 2.6 0 0 0 21 7.4V4.6A2.6 2.6 0 0 0 18.4 2h-2.8ZM15.6 12a2.6 2.6 0 0 0-2.6 2.6v4.8a2.6 2.6 0 0 0 2.6 2.6h2.8a2.6 2.6 0 0 0 2.6-2.6v-4.8a2.6 2.6 0 0 0-2.6-2.6h-2.8Z" fill="none"/>
+                                </svg>
+        
+                                <!-- TEXT -->
+                                <span class="transition-all duration-300 ease-in-out whitespace-nowrap md:text-green-400 
+                                    max-w-full ml-2 md:max-w-0 md:overflow-hidden md:group-hover:max-w-xs md:group-hover:ml-2">
+                                    Dashboard
+                                </span>
+                            
+                            </a>
+                        
+                        </li>
+        
+                        <li>
+                            <a href="{% url 'transaction-list' %}" 
+                            class="group relative flex items-center gap-1 py-2 pl-3 pr-4 text-white rounded md:p-0 hover:bg-gray-700 hover:text-green-400 transition-all duration-300 ease-in-out"
+                            aria-current="page">
+                        
+                                <!-- ICON -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-hand-coins transition-transform duration-300 ease-in-out">
+                                    <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/>
+                                    <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/>
+                                    <path d="m2 16 6 6"/>
+                                    <circle cx="16" cy="9" r="2.9"/>
+                                    <circle cx="6" cy="5" r="3"/>
+                                </svg>
+                                
+        
+                                <!-- TEXT -->
+                                <span class="transition-all duration-300 ease-in-out whitespace-nowrap md:text-green-400 
+                                    max-w-full ml-2 md:max-w-0 md:overflow-hidden md:group-hover:max-w-xs md:group-hover:ml-2">
+                                    Transactions
+                                </span>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="{% url 'category-list' %}" 
+                            class="group relative flex items-center gap-1 py-2 pl-3 pr-4 text-white rounded md:p-0 hover:bg-gray-700 hover:text-green-400 transition-all duration-300 ease-in-out"
+                            aria-current="page">
+                        
+                                <!-- ICON -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-bar-stacked-icon lucide-chart-bar-stacked"><path d="M11 13v4"/><path d="M15 5v4"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/><rect x="7" y="13" width="9" height="4" rx="1"/><rect x="7" y="5" width="12" height="4" rx="1"/></svg>
+                                
+        
+                                <!-- TEXT -->
+                                <span class="transition-all duration-300 ease-in-out whitespace-nowrap md:text-green-400 
+                                    max-w-full ml-2 md:max-w-0 md:overflow-hidden md:group-hover:max-w-xs md:group-hover:ml-2">
+                                    Category
+                                </span>
+                            </a>
+                        </li>
+        
+                        <li>
+                            <a href="{% url 'transactions-charts' %}" 
+                            class="group relative flex items-center gap-1 py-2 pl-3 pr-4 text-white rounded md:p-0 hover:bg-gray-700 hover:text-green-400 transition-all duration-300 ease-in-out"
+                            aria-current="page">
+                        
+                                <!-- ICON -->
+                                <?xml version="1.0" encoding="utf-8"?>
+                                <!--License: MIT. Made by Sargam Icons: https://github.com/planetabhi/sargam-icons-->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+                                </svg>
+                                  
+        
+                                <!-- TEXT -->
+                                <span class="transition-all duration-300 ease-in-out whitespace-nowrap md:text-green-400 
+                                    max-w-full ml-2 md:max-w-0 md:overflow-hidden md:group-hover:max-w-xs md:group-hover:ml-2">
+                                    Charts
+                                </span>
+                            </a>
+                        
+                        </li>
+        
+                    {% else %}
+                        <li>
+                            <a href="{% url 'account_login' %}" 
+                                class="block px-4 py-2 rounded-md hover:bg-gray-700 hover:text-green-400 transition duration-300 cursor-pointer">
+                                Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'account_signup' %}" 
+                                class="block px-4 py-2 rounded-md hover:bg-gray-700 hover:text-blue-400 transition duration-300 cursor-pointer">
+                                Sign Up
+                            </a>
+                        </li>
+                    
+                    {% endif %}
+                    </ul>
+            </div>
+    
+            <!-- User avatar luôn hiển thị -->
+            {% if user.is_authenticated %}
+                <div class="relative group">
+                    <!-- Avatar button -->
+                    <button id="account-btn"
+                        class="w-full flex items-center text-white gap-2 pl-1 pr-4 rounded md:p-0 transition-all duration-300 ease-in-out">
+                        <div class="relative inline-block">
+                            <!-- Avatar -->
+                            <div class="w-10 h-10 bg-gray-700 text-white rounded-full flex items-center justify-center">
+                                <span class="text-2xl">{{ user.username|slice:":1"|upper }}</span>
+
+                            </div>
+                          
+                            <!-- Online indicator -->
+                            <span class="absolute top-1 right-0 block w-2 h-2 bg-green-500 border-2 border-white rounded-full"></span>
+                        </div>
+                          
+                    </button>
+                
+                    <!-- Dropdown menu -->
+                    <div id="dropdown-menu"
+                        class="hidden absolute right-0 mt-2 bg-gray-700 rounded-md shadow-lg z-50 w-40 text-sm transition-all duration-300 ease-in-out font-bold">
+                        <a href="{% url 'account_logout' %}" class="block px-4 py-2 text-white hover:bg-gray-600">Logout</a>
+                        <a href="{% url 'account_change_password' %}" class="block px-4 py-2 text-white hover:bg-gray-600">Change Password</a>
+                    </div>
+                </div>
+            
+            {% endif %}
+        </div>
+    </div>
+        
+    <div class="hidden w-full" id="mobile-menu">
+        <ul class="flex flex-col font-bold p-2">
+        
+            {% if user.is_authenticated %}
+
+
+                <li>
+                    <a href="{% url 'dashboard' %}" 
+                    class="group relative flex items-center gap-1 py-2 pl-3 pr-4 text-white rounded md:p-0 hover:bg-gray-700 hover:text-green-400 transition-all duration-300 ease-in-out"
+                    aria-current="page">
+                
+                        <!-- ICON -->
+                        <?xml version="1.0" encoding="utf-8"?>
+                        <!--License: MIT. Made by Sargam Icons: https://github.com/planetabhi/sargam-icons-->
+                        <svg width="25px" height="25px" viewBox="0 0 24 24" fill="fff" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5.6 2A2.6 2.6 0 0 0 3 4.6v4.8A2.6 2.6 0 0 0 5.6 12h2.8A2.6 2.6 0 0 0 11 9.4V4.6A2.6 2.6 0 0 0 8.4 2H5.6ZM5.6 14A2.6 2.6 0 0 0 3 16.6v2.8A2.6 2.6 0 0 0 5.6 22h2.8a2.6 2.6 0 0 0 2.6-2.6v-2.8A2.6 2.6 0 0 0 8.4 14H5.6ZM15.6 2A2.6 2.6 0 0 0 13 4.6v2.8a2.6 2.6 0 0 0 2.6 2.6h2.8A2.6 2.6 0 0 0 21 7.4V4.6A2.6 2.6 0 0 0 18.4 2h-2.8ZM15.6 12a2.6 2.6 0 0 0-2.6 2.6v4.8a2.6 2.6 0 0 0 2.6 2.6h2.8a2.6 2.6 0 0 0 2.6-2.6v-4.8a2.6 2.6 0 0 0-2.6-2.6h-2.8Z" fill="none"/>
+                        </svg>
+
+                        <!-- TEXT -->
+                        <span class="transition-all duration-300 ease-in-out whitespace-nowrap md:text-green-400 
+                            max-w-full ml-2 md:max-w-0 md:overflow-hidden md:group-hover:max-w-xs md:group-hover:ml-2">
+                            Dashboard
+                        </span>
+                    
+                    </a>
+                
+                </li>
+
+                <li>
+                    <a href="{% url 'transaction-list' %}" 
+                    class="group relative flex items-center gap-1 py-2 pl-3 pr-4 text-white rounded md:p-0 hover:bg-gray-700 hover:text-green-400 transition-all duration-300 ease-in-out"
+                    aria-current="page">
+                
+                        <!-- ICON -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-hand-coins transition-transform duration-300 ease-in-out">
+                            <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/>
+                            <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/>
+                            <path d="m2 16 6 6"/>
+                            <circle cx="16" cy="9" r="2.9"/>
+                            <circle cx="6" cy="5" r="3"/>
+                        </svg>
+                        
+
+                        <!-- TEXT -->
+                        <span class="transition-all duration-300 ease-in-out whitespace-nowrap md:text-green-400 
+                            max-w-full ml-2 md:max-w-0 md:overflow-hidden md:group-hover:max-w-xs md:group-hover:ml-2">
+                            Transactions
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'category-list' %}" 
+                    class="group relative flex items-center gap-1 py-2 pl-3 pr-4 text-white rounded md:p-0 hover:bg-gray-700 hover:text-green-400 transition-all duration-300 ease-in-out"
+                    aria-current="page">
+                
+                        <!-- ICON -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-hand-coins transition-transform duration-300 ease-in-out">
+                            <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/>
+                            <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/>
+                            <path d="m2 16 6 6"/>
+                            <circle cx="16" cy="9" r="2.9"/>
+                            <circle cx="6" cy="5" r="3"/>
+                        </svg>
+                        
+
+                        <!-- TEXT -->
+                        <span class="transition-all duration-300 ease-in-out whitespace-nowrap md:text-green-400 
+                            max-w-full ml-2 md:max-w-0 md:overflow-hidden md:group-hover:max-w-xs md:group-hover:ml-2">
+                            Category
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'transactions-charts' %}" 
+                    class="group relative flex items-center gap-1 py-2 pl-3 pr-4 text-white rounded md:p-0 hover:bg-gray-700 hover:text-green-400 transition-all duration-300 ease-in-out"
+                    aria-current="page">
+                
+                        <!-- ICON -->
+                        <?xml version="1.0" encoding="utf-8"?>
+                        <!--License: MIT. Made by Sargam Icons: https://github.com/planetabhi/sargam-icons-->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+                        </svg>
+                            
+
+                        <!-- TEXT -->
+                        <span class="transition-all duration-300 ease-in-out whitespace-nowrap md:text-green-400 
+                            max-w-full ml-2 md:max-w-0 md:overflow-hidden md:group-hover:max-w-xs md:group-hover:ml-2">
+                            Charts
+                        </span>
+                    </a>
+                
+                </li>
+                
+
+            {% else %}
+                <li>
+                    <a href="{% url 'account_login' %}" 
+                        class="block px-4 py-2 rounded-md hover:bg-gray-700 hover:text-green-400 transition duration-300 cursor-pointer">
+                        Login
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'account_signup' %}" 
+                        class="block px-4 py-2 rounded-md hover:bg-gray-700 hover:text-blue-400 transition duration-300 cursor-pointer">
+                        Sign Up
+                    </a>
+                </li>
+            
+            {% endif %}
+        </ul>
+    </div>
+    <script src="{% static 'js/dropdown.js' %}"></script>    
+    
+
+  </nav>
+
+  

@@ -1,0 +1,26 @@
+{% load widget_tweaks %}
+
+<div class="max-w-2xl mx-auto mt-10 bg-gray-800 rounded-2xl shadow-lg p-6 text-white">
+    <h1 class="text-3xl font-semibold mb-6">Create Category</h1>
+
+    <form method="POST" hx-post="{% url 'create-category' %}">
+
+        {% csrf_token %}
+        
+        <!-- Include Category Form -->
+        {% include 'tracker/partials/category-form.html' %}
+        
+        <div class="mt-4 flex justify-center space-x-4">
+            <button type="submit" class="btn btn-outline btn-success">
+                Add
+            </button>
+            <button 
+                class="btn btn-outline btn-error"
+                hx-get="{% url 'category-list' %}"
+                hx-target="#category-block"
+                hx-push-url='/categories'>
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>

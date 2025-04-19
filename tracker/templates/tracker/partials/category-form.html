@@ -1,0 +1,10 @@
+{% load widget_tweaks %}
+
+<div class="mb-2 form-control text-white">
+    {{ form.name|add_label_class:"label text-white" }}
+    {% render_field form.name class="input bg-gray-700" %}
+    
+    {% for error in form.name.errors %}
+        <p class="text-red-400 mt-1"> {{ error }}</p>
+    {% endfor %}
+</div>

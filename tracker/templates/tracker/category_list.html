@@ -1,0 +1,12 @@
+{% extends 'tracker/base.html' %}
+
+{% block head_title %}
+    Category List
+{% endblock %}
+
+{% block content %}
+<div class="relative overflow-x-auto text-white" id="category-block">
+    
+    {% include 'tracker/partials/category-container.html' %}
+</div>
+{% endblock %}

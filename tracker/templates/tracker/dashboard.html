@@ -1,0 +1,136 @@
+{% extends 'tracker/base.html' %}
+{% load humanize %}
+{% load custom_tags %}
+
+{% block content %}
+<div class="max-w-[1024px] mx-auto px-4 py-6">
+
+    <!-- Title -->
+    <div class="text-center mb-10">
+        <h1 class="text-3xl font-semibold text-gray-800">Transaction Overview</h1>
+    </div>
+
+    <!-- Time Filter -->
+    <form method="get" id="transaction_summary_form" class="flex flex-wrap justify-center items-center gap-4 mb-8 ">
+        <div class="flex items-center gap-2">
+            <label for="month" class="text-lg text-gray-700">Summary for Month</label>
+            <select name="month" id="month" class="select select-bordered w-20 auto-submit bg-gray-800 text-white">
+                {% month_range as months %}
+                {% for m in months %}
+                    <option value="{{ m }}" {% if m == selected_month %}selected{% endif %}>{{ m }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="flex items-center gap-2">
+            <label for="year" class="text-lg text-gray-700">Year</label>
+            <select name="year" id="year" class="select select-bordered w-24 auto-submit bg-gray-800 text-white">
+                {% year_range 2020 2031 as years %}
+                {% for y in years %}
+                    <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+    </form>
+
+
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <p class="text-s font-bold text-gray-800">Total Income</p>
+            <p class="text-xl font-semibold text-green-700 mt-1">{{ total_income|floatformat:2|intcomma }}₫</p>
+        </div>
+    
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <p class="text-s font-bold text-gray-800">Total Expenses</p>
+            <p class="text-xl font-semibold text-red-600 mt-1">{{ total_expense|floatformat:2|intcomma }}₫</p>
+        </div>
+    
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <p class="text-s font-bold text-gray-800">Net Balance</p>
+            <p class="text-xl font-semibold text-blue-800 mt-1">{{ net_income|floatformat:2|intcomma }}₫</p>
+        </div>
+    
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <p class="text-s font-bold text-gray-800">Top Category</p>
+            {% if top_category %}
+                <p class="text-base text-gray-700 mt-1">{{ top_category.category__name }}</p>
+            {% else %}
+                <p class="text-base text-gray-400 mt-1">No data available</p>
+            {% endif %}
+        </div>
+    
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <p class="text-s font-bold text-gray-800">Total Transactions</p>
+            <p class="text-xl font-semibold text-blue-500 mt-1">{{ total_transactions }}</p>
+        </div>
+    </div>
+
+    <!-- Comparison Chart Section -->
+    <div class="bg-white p-4 rounded-2xl shadow-md mt-6 mb-10">
+        <h2 class="text-xl font-semibold text-black mb-4 text-center">Monthly Comparison (Current Month vs Last Month)</h2>
+        <div class="w-full overflow-x-auto">
+            {{ comparison_linechart|safe }}
+        </div>
+    </div>
+
+    <!-- Recent Transactions Table + View Mode -->
+    <div class="bg-white rounded-xl shadow p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+            <h2 class="text-xl font-semibold text-gray-800 text-center sm:text-left">Recent Transactions</h2>
+
+            <form method="get" class="flex gap-2 items-center">
+                <input type="hidden" name="month" value="{{ selected_month }}">
+                <input type="hidden" name="year" value="{{ selected_year }}">
+
+                <label for="view_mode" class="text-sm text-gray-700 font-medium">View:</label>
+                <select name="view_mode" id="view_mode" class="select select-sm select-bordered bg-gray-800 text-white auto-submit">
+                    <option value="latest" {% if view_mode == "latest" %}selected{% endif %}>5 Latest</option>
+                    <option value="monthly" {% if view_mode == "monthly" %}selected{% endif %}>All in Month</option>
+                </select>
+            </form>
+
+        </div>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200">
+            <table class="table w-full text-sm text-center">
+                <thead class="bg-gray-800 text-white">
+                    <tr>
+                        <th class="py-3 px-4">Date</th>
+                        <th class="py-3 px-4">Category</th>
+                        <th class="py-3 px-4">Type</th>
+                        <th class="py-3 px-4">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in recent_transactions %}
+                        <tr class="border-t hover:bg-gray-100 text-gray-700">
+                            <td class="py-2 px-4">{{ t.date }}</td>
+                            <td class="py-2 px-4">{{ t.category.name }}</td>
+                            <td class="py-2 px-4 capitalize">{{ t.type }}</td>
+                            <td class="py-2 px-4 text-right">{{ t.amount|intcomma }}₫</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-gray-400 py-4">No transactions found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Gửi form tương ứng khi thay đổi select
+    document.querySelectorAll('.auto-submit').forEach(select => {
+        select.addEventListener('change', function () {
+            this.closest('form').submit();  // Tìm form gần nhất và gửi form đó
+        });
+    });
+</script>
+
+{% endblock %}

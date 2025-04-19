@@ -1,0 +1,39 @@
+{% if message %}
+  <div role="alert" class="alert rounded-lg flex items-center justify-center 
+       px-4 py-3 shadow-md
+       {% if message_type == 'success' %}
+         bg-green-100 text-green-800 border border-green-300
+       {% else %}
+         bg-red-100 text-red-800 border border-red-300
+       {% endif %}">
+    <!-- icon -->
+    <svg class="w-6 h-6 mr-2 
+         {% if message_type == 'success' %}text-green-600{% else %}text-red-600{% endif %}"
+         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      {% if message_type == 'success' %}
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      {% else %}
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"/>
+      {% endif %}
+    </svg>
+    <span>{{ message }}</span>
+  </div>
+
+  <div class="mt-6 flex justify-center space-x-4">
+    {% if action == 'add' %}
+      <button class="btn btn-success"
+              hx-get="{% url 'create-category' %}"
+              hx-target="#category-block">
+        Add another
+      </button>
+    {% endif %}
+
+    <button class="btn {% if action == 'add' %}btn-outline btn-success{% else %}btn-success{% endif %}"
+            hx-get="{% url 'category-list' %}"
+            hx-target="#category-block">
+      View categories
+    </button>
+  </div>
+{% endif %}

@@ -1,0 +1,29 @@
+{% load widget_tweaks %}
+
+<div class="mt-8 p-6 rounded-2xl bg-gray-800 shadow-md max-w-xl mx-auto">
+    <h1 class="text-3xl font-semibold text-primary mb-6">
+        📁 Import Transactions
+    </h1>
+
+    <form hx-encoding="multipart/form-data" hx-post="{% url 'import' %}">
+        <div class="form-control mb-4">
+            <label class="label">
+                <span class="label-text">Upload CSV file</span>
+            </label>
+            <input type="file" name="file" accept=".csv"
+                class="file-input file-input-bordered file-input-accent w-full text-white" />
+        </div>
+
+        <div class="flex gap-4">
+            <button type="submit" class="btn btn-success">
+                ✅ Upload
+            </button>
+            <button type="button" class="btn btn-outline btn-error"
+                hx-get="{% url 'transaction-list' %}"
+                hx-target="#transaction-block"
+                hx-push-url="/transactions">
+                ❌ Cancel
+            </button>
+        </div>
+    </form>
+</div>

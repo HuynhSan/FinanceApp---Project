@@ -1,0 +1,16 @@
+body {
+    background-image: linear-gradient(to right top, #9db4c5, #a1c8e7, #7fa9d4, #6497bb, #4682b4) !important;
+    background-color: #ebf8ff !important;
+    min-height: 100vh;
+}
+
+
+nav {
+    color: white;
+    background-color: #4b6670;
+}
+
+
+
+
+
