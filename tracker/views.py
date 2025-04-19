@@ -38,7 +38,7 @@ def transaction_list(request):
     page_number = request.GET.get('page') or 1
     transaction_page = paginator.get_page(page_number)
 
-
+    total_transactions = transaction_filter.qs.count()
     total_income = transaction_filter.qs.get_total_incomes()
     total_expenses = transaction_filter.qs.get_total_expenses()
     context = {
@@ -46,7 +46,8 @@ def transaction_list(request):
         'filter': transaction_filter,
         'total_income': total_income,
         'total_expenses': total_expenses,
-        'net_income': total_income - total_expenses
+        'net_income': total_income - total_expenses,
+        'total_transactions': total_transactions
     }
 
     if request.htmx:
@@ -96,9 +97,6 @@ def dashboard_view(request):
     else:
         recent_transactions = transaction_filter.order_by('-date')[:5]
 
-    # Vẽ biểu đồ thu nhập và chi tiêu cho tháng hiện tại
-    income_expense_line = plot_income_expense_line_chart(transaction_filter)
-
     # Vẽ biểu đồ so sánh giữa tháng hiện tại và tháng trước
     comparison_line = plot_monthly_comparison_line_chart(transaction_filter, prev_month_filter, selected_month, prev_month)
 
@@ -112,10 +110,6 @@ def dashboard_view(request):
         'net_income': total_income - total_expense,
         'top_category': top_category,
         'view_mode': view_mode,
-        'income_expense_linechart': income_expense_line.to_html(config={
-            'staticPlot': True,
-            'displayModeBar': False
-        }),
         'comparison_linechart': comparison_line.to_html(config={
             'staticPlot': True,
             'displayModeBar': False

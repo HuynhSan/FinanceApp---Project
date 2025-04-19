@@ -22,6 +22,7 @@
                         <th class="px-6 py-3">Total Income</th>
                         <th class="px-6 py-3">Total Expenses</th>
                         <th class="px-6 py-3">Net Income</th>
+                        <th class="px-6 py-3">Total Transaction</th>
                         </tr>
                     </thead>
 
@@ -35,6 +36,9 @@
                         </td>
                         <td class="px-6 py-4 text-blue-400 font-semibold">
                             ${{ net_income|floatformat:2|intcomma }}
+                        </td>
+                        <td class="px-6 py-4 text-blue-400 font-semibold">
+                            {{ total_transactions|intcomma }}
                         </td>
                         </tr>
                     </tbody>
