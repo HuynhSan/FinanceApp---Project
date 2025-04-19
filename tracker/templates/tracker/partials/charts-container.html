@@ -7,7 +7,6 @@
     <div class="col-span-5 mt-14 space-y-8 lg:col-span-6">
 
         <div class="bg-base-100 p-2 rounded-2xl shadow-md">
-            <h2 class="text-xl font-semibold text-base-content mb-4 text-center">Income vs Expenses</h2>
             <div class="w-full overflow-x-auto">
                 {{ income_expense_linechart|safe }}
             </div>
@@ -15,7 +14,6 @@
 
         <!-- Income vs Expense Bar Chart -->
         <div class="bg-base-100 p-2 rounded-2xl shadow-md">
-            <h2 class="text-xl font-semibold text-base-content mb-4 text-center">Income vs Expenses</h2>
             <div class="w-full overflow-x-auto">
                 {{ income_expense_barchart|safe }}
             </div>
@@ -24,14 +22,12 @@
         <!-- Category Pie Charts -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="bg-base-100 p-2 rounded-2xl shadow-md">
-                <h2 class="text-xl font-semibold text-base-content mb-4 text-center">Income by Category</h2>
                 <div class="w-full overflow-x-auto">
                     {{ category_income_pie|safe }}
                 </div>
             </div>
 
             <div class="bg-base-100 p-2 rounded-2xl shadow-md">
-                <h2 class="text-xl font-semibold text-base-content mb-4 text-center">Expense by Category</h2>
                 <div class="w-full overflow-x-auto">
                     {{ category_expense_pie|safe }}
                 </div>
@@ -73,12 +69,12 @@
                 {% render_field filter.form.category class="text-gray-300 border-gray-300 rounded focus:ring-green-500 mr-2 cursor-pointer" %}
             </div>
 
-            <button class="btn btn-success w-full">
+            <button class="btn btn-primary w-full">
                 Filter
             </button>
 
             <button 
-                class="btn btn-outline w-full" 
+                class="btn btn-outline w-full text-white" 
                 hx-get="{% url 'transactions-charts' %}"
                 hx-target="#charts-container"
                 hx-swap="outerHTML">

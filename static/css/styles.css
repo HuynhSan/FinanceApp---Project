@@ -1,6 +1,7 @@
 body {
-    background-image: linear-gradient(to right top, #9db4c5, #a1c8e7, #7fa9d4, #6497bb, #4682b4) !important;
-    background-color: #ebf8ff !important;
+    background-image: linear-gradient(to right top, #e6f0f3, #d3e3ec, #bfd6e4, #a7c6db, #8db5d2) !important;
+
+    background-color: #f8f8f8 !important;
     min-height: 100vh;
 }
 

@@ -110,7 +110,7 @@
                             <td class="py-2 px-4">{{ t.date }}</td>
                             <td class="py-2 px-4">{{ t.category.name }}</td>
                             <td class="py-2 px-4 capitalize">{{ t.type }}</td>
-                            <td class="py-2 px-4 text-right">{{ t.amount|intcomma }}₫</td>
+                            <td class="py-2 px-4">{{ t.amount|intcomma }}₫</td>
                         </tr>
                     {% empty %}
                         <tr>
