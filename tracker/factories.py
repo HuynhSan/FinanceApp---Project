@@ -17,10 +17,13 @@ class CategoryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Category 
         django_get_or_create = ('name',) 
+    
+    
 
     # factory.Iterator() sẽ lặp qua các giá trị được truyền vào, và mỗi lần tạo instance mới, nó sẽ lấy giá trị kế tiếp.
     name = factory.Iterator(
         ['Bills', 'Housing', 'Salary', 'Food', 'Social']
+    
     )
 
 

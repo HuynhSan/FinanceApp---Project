@@ -217,8 +217,8 @@ def test_login_success(client, django_user_model):
 def test_signup_success(client, django_user_model):
     response = client.post('/accounts/signup/', {
         'username': 'newuser',
-        'password1': 'strongpass123',
-        'password2': 'strongpass123'
+        'password1': 'strongpass123@',
+        'password2': 'strongpass123@'
     })
     assert response.status_code == 302
     assert django_user_model.objects.filter(username='newuser').exists()
